@@ -57,7 +57,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/image/food0.png
+    - assets/image/
 
   #     - assets/image/food0.png
   #   - images/a_dot_burr.jpeg

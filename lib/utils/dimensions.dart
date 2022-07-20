@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:get/get.dart';
 
 class Dimension {
@@ -19,9 +21,10 @@ class Dimension {
   static double width20 = screenHeight / 34.2;
   static double width30 = screenHeight / 22.8;
 
+//font size
+  static double font16 = screenHeight / 42.75;
   static double font20 = screenHeight / 34.2;
   static double font26 = screenHeight / 28.2;
-
 
   static double radius15 = screenHeight / 45.6;
   static double radius20 = screenHeight / 34.2;
@@ -30,10 +33,12 @@ class Dimension {
   static double iconSize24 = screenHeight / 28.5;
   static double iconSize16 = screenHeight / 45.75;
 
-  static double listViewImgSize = screenWidth/3.25;
-  static double listViewTextContSize = screenWidth/3.9;
+// list view size
+  static double listViewImgSize = screenWidth / 3.43;
+  static double listViewTextContSize = screenWidth / 4.12;
 
-  static double popularFoodImgSize = screenHeight/2.41;
-
-  static double bottomHeightBar = screenHeight/5.03;
+//popular food
+  static double popularFoodImgSize = screenHeight / 1.95;
+//bottom height
+  static double bottomHeightBar = screenHeight / 5.7;
 }
