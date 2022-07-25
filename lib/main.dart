@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
-<<<<<<< HEAD
 import 'package:food_delivery_app/Pages/home/foot_page_body.dart';
-=======
 import 'package:food_delivery_app/controller/popular_product_controller.dart';
->>>>>>> b0fbf75ce1b0c3231a0eb8204cdcd5f81b2c3ca1
 import 'package:food_delivery_app/main_food_page.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:food_delivery_app/helper/dependecies.dart' as dep;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dep.init;
