@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
+import 'package:food_delivery_app/Pages/home/foot_page_body.dart';
 import 'package:food_delivery_app/main_food_page.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
