@@ -23,6 +23,8 @@ class PopularProductController extends GetxController {
       //print(_popularProductList);
       _isLoaded = true;
       update();
-    } else {}
+    } else {
+      print("error");
+    }
   }
 }

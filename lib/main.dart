@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
 import 'package:food_delivery_app/Pages/home/foot_page_body.dart';
+import 'package:food_delivery_app/helper/my_https_provider.dart';
 import 'package:food_delivery_app/main_food_page.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:get/get.dart';
@@ -9,9 +12,11 @@ import 'package:food_delivery_app/helper/dependecies.dart' as dep;
 
 import 'controller/popular_product_controller.dart';
 import 'controller/recommended_product_controller.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dep.init;
+  HttpOverrides.global = await new MyHttpOverrides();
+  await dep.init();
   runApp(const MyApp());
 }
 

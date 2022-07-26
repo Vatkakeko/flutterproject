@@ -1,4 +1,3 @@
-import 'package:food_delivery_app/data/repository/Recommended_product_repo.dart';
 import 'package:food_delivery_app/data/repository/recommended_product_repo.dart';
 import 'package:food_delivery_app/model/product_model.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,8 @@ class RecommendedProductController extends GetxController {
   bool get isLoaded => _isLoaded;
 
   Future<void> getRecommendedProductList() async {
-    Response response = await recommendedProductRepo.getRecommendedProductList();
+    Response response =
+        await recommendedProductRepo.getRecommendedProductList();
 
     if (response.statusCode == 200) {
       print("got products");

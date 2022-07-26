@@ -9,8 +9,9 @@ class ApiClient extends GetConnect implements GetxService {
   ApiClient({required this.appBaseUrl}) {
     baseUrl = appBaseUrl;
     timeout = Duration(seconds: 30);
-    token =AppConstants.TOKEN;
-        _mainHeaders = {
+    token = AppConstants.TOKEN;
+    allowAutoSignedCert = true;
+    _mainHeaders = {
       'Content-type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     };
@@ -19,6 +20,10 @@ class ApiClient extends GetConnect implements GetxService {
   Future<Response> getData(String uri) async {
     try {
       Response response = await get(uri);
+      if (response.status.hasError) {
+        print(Future.error(response.statusText!));
+      }
+
       return response;
     } catch (e) {
       return Response(statusCode: 1, statusText: e.toString());
