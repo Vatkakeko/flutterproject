@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controller/cart_controller.dart';
 import 'package:food_delivery_app/data/repository/popular_product_repo.dart';
 import 'package:food_delivery_app/model/product_model.dart';
 import 'package:food_delivery_app/utils/colors.dart';
@@ -11,18 +12,21 @@ class PopularProductController extends GetxController {
 
   List<ProductModel> _popularProductList = [];
   List<ProductModel> get popularProductList => _popularProductList;
+  late CartController _cart;
 
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
   int _quantity = 0;
 
   int get quantity => _quantity;
+  int _inCartItems=0;
+  int get inCartItem =>_inCartItems=_quantity;
 
   Future<void> getPopularProductList() async {
     Response response = await popularProductRepo.getPopualarProductList();
 
     if (response.statusCode == 200) {
-      print("got products");
+      
       _popularProductList = [];
       _popularProductList.addAll(Product.fromJson(response.body).products);
       //print(_popularProductList);
@@ -44,6 +48,7 @@ class PopularProductController extends GetxController {
   }
 
   int checkQuantity(int qty) {
+
     if (qty < 0) {
       Get.snackbar(
         "Item Count",
@@ -65,4 +70,29 @@ class PopularProductController extends GetxController {
       return qty;
     }
   }
+  void initProduct(CartController cart){
+    _quantity=0;
+    _inCartItems=0;
+    _cart=cart;
+
+
+  }
+  void addItem(ProductModel product){
+    if(_quantity>0){
+      _cart.addItem(product, _quantity);
+      _quantity=0;
+      _cart.items.forEach((key, value) {
+        print("The id is "+value.id.toString()+"The quantity is "+value.quantity.toString());
+      });
+    }else{
+      Get.snackbar(
+        "Item Count",
+        "You should at least add an item in the cart",
+        backgroundColor: AppColors.mainColor,
+        colorText: Colors.white,
+      );
+    }
+    
+  }
+
 }
