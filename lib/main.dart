@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Pages/cart/cart_page.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
 import 'package:food_delivery_app/Pages/home/foot_page_body.dart';
 import 'package:food_delivery_app/helper/my_https_provider.dart';
