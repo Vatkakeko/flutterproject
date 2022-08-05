@@ -1,14 +1,19 @@
 import 'package:food_delivery_app/Pages/cart/cart_page.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
 import 'package:food_delivery_app/Pages/food/recommended_food_detail.dart';
-import 'package:food_delivery_app/main_food_page.dart';
+import 'package:food_delivery_app/Pages/home/home_page.dart';
+import 'package:food_delivery_app/Pages/home/main_food_page.dart';
+import 'package:food_delivery_app/Pages/splash/splash_page.dart';
 import 'package:get/get.dart';
 
 class RouteHelper {
+  static const String splashPage="/splash-page";
   static const String initial = "/";
   static const String popularFood = "/popular-food";
   static const String recommendedFood = "/recommended-food";
   static const String cartPage = "/card-page";
+
+  static String getSplashPage()=>'$splashPage';
   static String getInitial() => '$initial';
   static String getPopularFood(int pageId, String page) =>
       '$popularFood?pageId=$pageId&page=$page';
@@ -18,7 +23,8 @@ class RouteHelper {
   static String getCardPage() => "$cartPage";
 
   static List<GetPage> routes = [
-    GetPage(name: initial, page: () => MainFoodPage()),
+    GetPage(name: splashPage, page: ()=>SplashScreen()),
+    GetPage(name: initial, page: () => HomePage()),
     GetPage(
         name: popularFood,
         page: () {

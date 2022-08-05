@@ -7,7 +7,7 @@ import 'package:food_delivery_app/controller/cart_controller.dart';
 import 'package:food_delivery_app/controller/popular_product_controller.dart';
 import 'package:food_delivery_app/controller/recommended_product_controller.dart';
 import 'package:food_delivery_app/main.dart';
-import 'package:food_delivery_app/main_food_page.dart';
+import 'package:food_delivery_app/Pages/home/main_food_page.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/app_constant.dart';
 import 'package:food_delivery_app/utils/colors.dart';
