@@ -196,6 +196,7 @@ class CartPage extends StatelessWidget {
                                                             _cartList[index]
                                                                 .product!,
                                                             1);
+                                                        print("Being Tapped");
                                                       },
                                                       child: Icon(
                                                         Icons.add,
@@ -260,7 +261,11 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    print("tapped");
+                    cartController.addToCartHistory();
+                  },
+                  
                   child: Container(
                     padding: EdgeInsets.only(
                         top: Dimension.height20,
@@ -268,7 +273,7 @@ class CartPage extends StatelessWidget {
                         left: Dimension.width20,
                         right: Dimension.width20),
                     child: BigText(
-                      text: "\$  | Add to cart",
+                      text: "Check out",
                       color: Colors.white,
                     ),
                     decoration: BoxDecoration(
