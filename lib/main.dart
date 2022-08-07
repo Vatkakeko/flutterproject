@@ -5,6 +5,7 @@ import 'package:food_delivery_app/Pages/cart/cart_page.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
 import 'package:food_delivery_app/Pages/home/foot_page_body.dart';
 import 'package:food_delivery_app/Pages/splash/splash_page.dart';
+import 'package:food_delivery_app/controller/cart_controller.dart';
 import 'package:food_delivery_app/helper/my_https_provider.dart';
 import 'package:food_delivery_app/Pages/home/main_food_page.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.find<CartController>().getCartData();
     return GetBuilder<PopularProductController>(builder: (_) {
       return GetBuilder<RecommendedProductController>(builder: (_) {
         return GetMaterialApp(
