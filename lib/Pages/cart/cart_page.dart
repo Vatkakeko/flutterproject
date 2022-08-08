@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:food_delivery_app/base/no_data_page.dart';
 import 'package:food_delivery_app/controller/cart_controller.dart';
 import 'package:food_delivery_app/controller/popular_product_controller.dart';
 import 'package:food_delivery_app/controller/recommended_product_controller.dart';
@@ -60,7 +61,8 @@ class CartPage extends StatelessWidget {
                     )
                   ],
                 )),
-            Positioned(
+            GetBuilder<CartController>(builder: (_cartController){
+              return _cartController.getItems.length>0?Positioned(
                 top: Dimension.height20 * 5,
                 left: Dimension.width20,
                 right: Dimension.width20,
@@ -98,10 +100,19 @@ class CartPage extends StatelessWidget {
                                               .recommendedProductList
                                               .indexOf(
                                                   _cartList[index].product!);
-                                          Get.toNamed(
+                                          if(recommendedIndex<0){
+                                             Get.snackbar(
+                                                "History product",
+                                                "Product review is not available for history product",
+                                                backgroundColor: AppColors.mainColor,
+                                                colorText: Colors.white,
+                                            );
+                                          }else{
+                                            Get.toNamed(
                                               RouteHelper.getRecommendedFood(
                                                   recommendedIndex,
                                                   "cartpage"));
+                                          }
                                         }
                                       },
                                       child: Container(
@@ -217,7 +228,8 @@ class CartPage extends StatelessWidget {
                               );
                             });
                       }),
-                    )))
+                    ))):NoDataPage(text: "Your cart is empty");
+            })
           ],
         ),
         bottomNavigationBar:
@@ -234,7 +246,8 @@ class CartPage extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(Dimension.radius20 * 2),
                     topRight: Radius.circular(Dimension.radius20 * 2))),
-            child: Row(
+            child: cartController.getItems.length>0?
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
@@ -283,7 +296,7 @@ class CartPage extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            ):Container()
           );
         }));
   }
