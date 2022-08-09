@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controller/popular_product_controller.dart';
+import 'package:food_delivery_app/controller/recommended_product_controller.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:food_delivery_app/widgets/small_text.dart';
+import 'package:get/get.dart';
 
 import 'foot_page_body.dart';
 
@@ -16,63 +19,70 @@ class MainFoodPage extends StatefulWidget {
 }
 
 class _MainFoodPage extends State<MainFoodPage> {
+  Future<void> _loadResources() async {
+    await Get.find<PopularProductController>().getPopularProductList();
+    await Get.find<RecommendedProductController>().getRecommendedProductList();
+  }
+
   @override
   Widget build(BuildContext context) {
     print("height of the screen is" +
         MediaQuery.of(context).size.height.toString());
-    return Scaffold(
-        body: Column(
-      children: [
-        Container(
-          child: Container(
-            margin: EdgeInsets.only(
-                top: Dimension.height45, bottom: Dimension.height15),
-            padding: EdgeInsets.only(
-                left: Dimension.width20, right: Dimension.width20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
+    return RefreshIndicator(
+        child: Column(
+          children: [
+            Container(
+              child: Container(
+                margin: EdgeInsets.only(
+                    top: Dimension.height45, bottom: Dimension.height15),
+                padding: EdgeInsets.only(
+                    left: Dimension.width20, right: Dimension.width20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    BigText(
-                      text: "Phnom Penh",
-                      color: AppColors.mainColor,
-                    ),
-                    Row(
+                    Column(
                       children: [
-                        SmallText(
-                          text: "Nasingdi",
-                          color: Colors.black54,
+                        BigText(
+                          text: "Phnom Penh",
+                          color: AppColors.mainColor,
                         ),
-                        Icon(Icons.arrow_drop_down)
+                        Row(
+                          children: [
+                            SmallText(
+                              text: "Nasingdi",
+                              color: Colors.black54,
+                            ),
+                            Icon(Icons.arrow_drop_down)
+                          ],
+                        )
                       ],
+                    ),
+                    Center(
+                      child: Container(
+                        width: Dimension.height45,
+                        height: Dimension.height45,
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                          size: Dimension.iconSize24,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimension.radius15),
+                          color: AppColors.mainColor,
+                        ),
+                      ),
                     )
                   ],
                 ),
-                Center(
-                  child: Container(
-                    width: Dimension.height45,
-                    height: Dimension.height45,
-                    child: Icon(
-                      Icons.search,
-                      color: Colors.white,
-                      size: Dimension.iconSize24,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimension.radius15),
-                      color: AppColors.mainColor,
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-          ),
+            Expanded(
+                child: SingleChildScrollView(
+              child: FoodPageBody(),
+            )),
+          ],
         ),
-        Expanded(
-            child: SingleChildScrollView(
-          child: FoodPageBody(),
-        )),
-      ],
-    ));
+        onRefresh: _loadResources);
   }
 }

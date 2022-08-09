@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Pages/auth/sign_in_page.dart';
+import 'package:food_delivery_app/Pages/auth/signup_page.dart';
 import 'package:food_delivery_app/Pages/cart/cart_page.dart';
 import 'package:food_delivery_app/Pages/food/popular.food.detail.dart';
 import 'package:food_delivery_app/Pages/home/foot_page_body.dart';
@@ -29,16 +31,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    
     Get.find<CartController>().getCartData();
-    Get.find<PopularProductController>().getPopularProductList();
-    Get.find<RecommendedProductController>().getRecommendedProductList();
+    // Get.find<PopularProductController>().getPopularProductList();
+    // Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetBuilder<PopularProductController>(builder: (_) {
       return GetBuilder<RecommendedProductController>(builder: (_) {
         return GetMaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          //home: MainFoodPage(),
+          //home: SignInPage(),
           initialRoute: RouteHelper.getSplashPage(),
           getPages: RouteHelper.routes,
         );
