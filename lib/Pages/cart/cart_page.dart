@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:food_delivery_app/base/no_data_page.dart';
+import 'package:food_delivery_app/controller/auth_controller.dart';
 import 'package:food_delivery_app/controller/cart_controller.dart';
 import 'package:food_delivery_app/controller/popular_product_controller.dart';
 import 'package:food_delivery_app/controller/recommended_product_controller.dart';
@@ -275,8 +276,13 @@ class CartPage extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print("tapped");
+                    if(Get.find<AuthController>().userLoggedIn()){
                     cartController.addToCartHistory();
+                    }else{
+                    Get.toNamed(RouteHelper.getSignInPage());
+
+                    }
+                    
                   },
                   
                   child: Container(

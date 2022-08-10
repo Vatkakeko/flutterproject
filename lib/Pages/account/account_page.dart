@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controller/auth_controller.dart';
+import 'package:food_delivery_app/controller/cart_controller.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/widgets/account_widget.dart';
 import 'package:food_delivery_app/widgets/app_icons.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
+import 'package:get/get.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -45,7 +49,7 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
                     bigText: BigText(
-                      text: "Mona",
+                      text: "Lucifer",
                     ),
                   ),
                   SizedBox(
@@ -59,7 +63,7 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
                     bigText: BigText(
-                      text: "Mona",
+                      text: "Contact",
                     ),
                   ),
                   SizedBox(
@@ -73,7 +77,7 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
                     bigText: BigText(
-                      text: "Mona",
+                      text: "Email",
                     ),
                   ),
                   SizedBox(
@@ -87,7 +91,7 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
                     bigText: BigText(
-                      text: "Mona",
+                      text: "Address",
                     ),
                   ),
                   SizedBox(
@@ -101,8 +105,38 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
                     bigText: BigText(
-                      text: "Mona",
+                      text: "Message",
                     ),
+                  ),
+                  SizedBox(
+                    height: Dimension.height10,
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      if(Get.find<AuthController>().userLoggedIn()){
+                        Get.find<AuthController>().clearShareData();
+                        Get.find<CartController>().clear();
+                        Get.find<CartController>().clearCartHistory();
+                        Get.offNamed(RouteHelper.getSignInPage());
+                      }else{
+                        print("You logged out");
+                      }
+                    },
+                    child: AccountWidget(
+                    appIcon: AppIcon(
+                        icon: Icons.logout,
+                        backgroundColor: Colors.redAccent,
+                        iconColor: Colors.white,
+                        iconSize: Dimension.height10 * 5 / 2,
+                        size: Dimension.height10 * 5),
+                    bigText: BigText(
+                      text: "Logout",
+                    ),
+                  ),
+
+                  ),
+                  SizedBox(
+                    height: Dimension.height10,
                   ),
                 ],
               ),

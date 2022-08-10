@@ -1,11 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/Pages/auth/signup_page.dart';
+import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
 import 'package:food_delivery_app/widgets/app_text_field.dart';
 import 'package:food_delivery_app/widgets/big_text.dart';
 import 'package:get/get.dart';
+
+import '../../base/show_custom_snackbar.dart';
+import '../../controller/auth_controller.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -14,12 +18,38 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
-    var nameController = TextEditingController();
-    var phoneController = TextEditingController();
+    //var nameController = TextEditingController();
+    //var phoneController = TextEditingController();
+     void _login(AuthController authController) {
+      
+      String email = emailController.text.trim();
+      String password = passwordController.text.trim();
 
+      if (email.isEmpty) {
+        showCustomSnackBar("Type in Your Email address", title: "Email");
+      } else if (!GetUtils.isEmail(email)) {
+        showCustomSnackBar("Type in a valid email address",
+            title: "valid Email address");
+      } else if (password.isEmpty) {
+        showCustomSnackBar("Type in Your Password", title: "Password");
+      } else if (password.length < 6) {
+        showCustomSnackBar("Password cannot be less than six characters",
+            title: "Password");
+      } else {
+       
+        authController.login(email,password).then((status) {
+          if (status.isSuccess) {
+            Get.toNamed(RouteHelper.getInitial());
+          } else {
+            showCustomSnackBar(status.message);
+          }
+        });
+      }
+    }
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: GetBuilder<AuthController>(builder: (authController){
+        return SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
@@ -59,8 +89,8 @@ class SignInPage extends StatelessWidget {
             ),
             AppTextField(
               textEditingController: passwordController,
-              hintText: "Email",
-              icon: Icons.password_sharp,
+              hintText: "Password",
+              icon: Icons.password_sharp,isObscure: true,
             ),
             SizedBox(
               height: Dimension.height20,
@@ -81,6 +111,11 @@ class SignInPage extends StatelessWidget {
             SizedBox(
               height: Dimension.screenHeight * 0.05,
             ),
+            GestureDetector(
+              onTap: (){
+                _login(authController);
+              },
+            child:
             Container(
               width: Dimension.screenWidth / 2,
               height: Dimension.screenHeight / 13,
@@ -95,6 +130,7 @@ class SignInPage extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
+            ),
             ),
             SizedBox(
               height: Dimension.screenHeight * 0.05,
@@ -120,7 +156,10 @@ class SignInPage extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
+      );
+
+      })
+      );
+    
   }
 }
