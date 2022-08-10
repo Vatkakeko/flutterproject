@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/base/custom_loader.dart';
 import 'package:food_delivery_app/controller/auth_controller.dart';
 import 'package:food_delivery_app/controller/cart_controller.dart';
+import 'package:food_delivery_app/controller/user_controller.dart';
 import 'package:food_delivery_app/routes/route_helper.dart';
 import 'package:food_delivery_app/utils/colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
@@ -14,6 +16,11 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
+    if(_userLoggedIn){
+      Get.find<UserController>().getUserInfo();
+      
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.mainColor,
@@ -23,7 +30,9 @@ class AccountPage extends StatelessWidget {
           color: Colors.white,
         ),
       ),
-      body: Container(
+      body:GetBuilder<UserController>(builder: (userController){
+        return  _userLoggedIn?
+        (userController.isLoading?Container(
         width: double.maxFinite,
         margin: EdgeInsets.only(top: Dimension.height20),
         child: Column(children: [
@@ -48,9 +57,7 @@ class AccountPage extends StatelessWidget {
                         iconColor: Colors.white,
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
-                    bigText: BigText(
-                      text: "Lucifer",
-                    ),
+                    bigText: BigText(text: userController.userModel.name),
                   ),
                   SizedBox(
                     height: Dimension.height10,
@@ -63,7 +70,7 @@ class AccountPage extends StatelessWidget {
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
                     bigText: BigText(
-                      text: "Contact",
+                      text: userController.userModel.phone,
                     ),
                   ),
                   SizedBox(
@@ -76,8 +83,7 @@ class AccountPage extends StatelessWidget {
                         iconColor: Colors.white,
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
-                    bigText: BigText(
-                      text: "Email",
+                    bigText: BigText(text: userController.userModel.email,
                     ),
                   ),
                   SizedBox(
@@ -90,8 +96,7 @@ class AccountPage extends StatelessWidget {
                         iconColor: Colors.white,
                         iconSize: Dimension.height10 * 5 / 2,
                         size: Dimension.height10 * 5),
-                    bigText: BigText(
-                      text: "Address",
+                    bigText: BigText(text: "Address",
                     ),
                   ),
                   SizedBox(
@@ -143,7 +148,44 @@ class AccountPage extends StatelessWidget {
             ),
           )
         ]),
-      ),
-    );
+        ):
+        CustomLoader()):
+        Container(child: Center(child:Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width:double.maxFinite,
+              height: Dimension.height20*8,
+              margin: EdgeInsets.only(left: Dimension.width20,right: Dimension.width20), 
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimension.radius20),
+                image:DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage("assets/image/signintocontinue.png")
+                  )
+                ),
+          ),
+        
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(RouteHelper.getSignInPage());
+                    },
+                    child: Container(
+                                width:double.minPositive,
+                                height: Dimension.height20*2,
+                                margin: EdgeInsets.only(left: Dimension.width20,right: Dimension.width20), 
+                                decoration: BoxDecoration(
+                                  color: AppColors.mainColor ,
+                                  borderRadius: BorderRadius.circular(Dimension.radius20),
+                                  
+                                  ),
+                                  child: Center(child: BigText(text: "Sign in",color: Colors.white,size: Dimension.font26,)),
+                            ),
+                  ),
+        
+        ])));
+    
+      })      
+      );
   }
 }

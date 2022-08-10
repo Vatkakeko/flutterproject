@@ -1,4 +1,4 @@
-import 'package:food_delivery_app/data/repository/auth_repo.dart';
+ import 'package:food_delivery_app/data/repository/auth_repo.dart';
 import 'package:food_delivery_app/model/response_model.dart';
 import 'package:food_delivery_app/model/sign_up_body_model.dart';
 import 'package:get/get.dart';
@@ -34,6 +34,7 @@ class AuthController extends GetxController implements GetxService {
     late ResposeModel resposeModel;
     if (response.statusCode == 200) {
       authRepo.saveUserToken(response.body["token"]);
+      print("My token is " + response.body["token"]);
       resposeModel = ResposeModel(true, response.body["token"]);
     } else {
       resposeModel = ResposeModel(false, response.statusText!);
