@@ -3,7 +3,7 @@ class AppConstants {
   static const int APP_VERSION = 1;
 
 //https://mvs.bslmeiyu.com
-  static const String BASE_URL = "http://192.168.0.7:80";
+  static const String BASE_URL = "http://192.168.2.30:80";
   static const String POPULAR_PRODUCT_URI = "/api/v1/products/popular";
   static const String RECOMMENDED_PRODUCT_URI = "/api/v1/products/recommended";
   static const String UPLOAD_URL = "/uploads/";
