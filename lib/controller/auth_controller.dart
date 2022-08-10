@@ -27,4 +27,29 @@ class AuthController extends GetxController implements GetxService {
     update();
     return resposeModel;
   }
+  Future<ResposeModel> login(String email, String password) async {
+    _isLoading = true;
+    update();
+    Response response = await authRepo.login(email, password);
+    late ResposeModel resposeModel;
+    if (response.statusCode == 200) {
+      authRepo.saveUserToken(response.body["token"]);
+      resposeModel = ResposeModel(true, response.body["token"]);
+    } else {
+      resposeModel = ResposeModel(false, response.statusText!);
+    }
+    _isLoading = false;
+    update();
+    return resposeModel;
+  }
+  void saveUserNumberAndPassword(String number, String password){
+    authRepo.saveUserNumberAndPassword(number, password);
+  }
+  bool userLoggedIn(){
+    return authRepo.userLoggedIn();
+  }
+  bool clearShareData(){
+    return authRepo.clearSharedData();
+  }
+  
 }

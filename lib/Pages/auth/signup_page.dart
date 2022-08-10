@@ -95,15 +95,15 @@ class SignUpPage extends StatelessWidget {
                       ),
                       AppTextField(
                         textEditingController: passwordController,
-                        hintText: "Email",
-                        icon: Icons.password_sharp,
+                        hintText: "Password",
+                        icon: Icons.password_sharp,isObscure: true,
                       ),
                       SizedBox(
                         height: Dimension.height20,
                       ),
                       AppTextField(
                         textEditingController: nameController,
-                        hintText: "Email",
+                        hintText: "Name",
                         icon: Icons.person,
                       ),
                       SizedBox(
@@ -111,7 +111,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                       AppTextField(
                         textEditingController: phoneController,
-                        hintText: "Email",
+                        hintText: "Phone",
                         icon: Icons.phone,
                       ),
                       SizedBox(
