@@ -3,7 +3,7 @@ Description: Food app is an application that is build up in the objective to mak
 A new Flutter project.
 
 ## Getting Started
-#### To set up:
+### To set up:
 1.clone project:
 - git clone <https://github.com/Vatkakeko/flutterproject.git>
 - browse to project directory and open terminal then run <mark>composer install</mark>
@@ -14,12 +14,10 @@ A new Flutter project.
 - Edit .env file :- In APP_URL, change the default URL to your http://ip_address:port_number(80)/
 - run php artisan serve --host ip_address --port port_number(80)
 - visit ip_address/admin in your browser(Admin password: admin and Admin_name: admin)
-2.Go to project root directory:
-- ==flutter pub get==
-- locate to lib>utils>app_constants, BASE_URL= =="http://ip_address:port"==
+2. Go to project root directory:
+- flutter pub get
+- locate to lib>utils>app_constants, BASE_URL= "http://ip_address:port"
 - flutter run
-- <mark>very important words</mark>.
-- ==very important words==.
 
 This project is a starting point for a Flutter application.
 
