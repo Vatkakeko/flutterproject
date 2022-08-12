@@ -11,7 +11,7 @@ A new Flutter project.
 - php artisan key:generate
 - Set your database credentials in your .env file
 - find your local IP address: ipconfig
-- Edit .env file :- In APP_URL, change the default URL to your http://ip_address:port_number(80)/
+- Edit .env file :- In APP_URL, change the default URL to your <http://ip_address:port_number(80)/>
 - run php artisan serve --host ip_address --port port_number(80)
 - visit ip_address/admin in your browser(Admin password: admin and Admin_name: admin)
 2. Go to project root directory:
