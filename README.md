@@ -7,13 +7,13 @@ To set up:
 1.clone project:
 -git clone <https://github.com/Vatkakeko/flutterproject.git>
 -browse to project directory and open terminal then run <mark>composer install</mark>
--rename or copy ==.env.example== file to ==.env==
+-rename or copy .env.example file to .env
 -php artisan key:generate
--Set your database credentials in your ==.env== file
+-Set your database credentials in your .env file
 -find your local IP address: ipconfig
 -Edit .env file :- In APP_URL, change the default URL to your <http://ip_address:port_number(80)/>
--run ==php artisan serve --host ip_address --port port_number(80)==
--visit ip_address/admin in your browser(Admin password: ==admin== and Admin_name: ==admin==)
+-run php artisan serve --host ip_address --port port_number(80)
+-visit ip_address/admin in your browser(Admin password: admin and Admin_name: admin)
 2.Go to project root directory:
 - ==flutter pub get==
 -locate to lib>utils>app_constants, BASE_URL= =="http://ip_address:port"==
