@@ -6,7 +6,7 @@ A new Flutter project.
 To set up:
 1.clone project:
 -git clone <https://github.com/Vatkakeko/flutterproject.git>
--browse to project directory and open terminal then run ==composer install==
+-browse to project directory and open terminal then run <mark>composer install</mark>
 -rename or copy ==.env.example== file to ==.env==
 -php artisan key:generate
 -Set your database credentials in your ==.env== file
